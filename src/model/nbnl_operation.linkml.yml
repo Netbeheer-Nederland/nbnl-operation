@@ -9,13 +9,249 @@ imports:
 prefixes:
   linkml: https://w3id.org/linkml/
   cim: https://cim.ucaiug.io/ns#
-  dcterms: http://purl.org/dc/terms/
-  nbnl-term: https://begrippen.netbeheernederland.nl/id/
-  unit: http://qudt.org/vocab/unit/
+  dct: http://purl.org/dc/terms/
+  gh: https://github.com/
+  cbs: https://www.cbs.nl/nl-nl/onze-diensten/methoden/begrippen/
+  eu: https://cim.ucaiug.io/ns/eu#
+  nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  nl: https://cim.ucaiug.io/ns/nl#
+  skos: http://www.w3.org/2004/02/skos/core#
+  xsd: http://www.w3.org/2001/XMLSchema#
 annotations:
   model_uri: https://modellen.netbeheernederland.nl/nbnl-operation
   exchange_format: application/ld+json
   model_type: data-product
-types: {}
-enums: {}
-classes: {}
+enums:
+  UnitMultiplier:
+    description: "The unit multipliers defined for the CIM.  When applied to unit\
+      \ symbols, the unit symbol is treated as a derived unit. Regardless of the contents\
+      \ of the unit symbol text, the unit symbol shall be treated as if it were a\
+      \ single-character unit symbol. Unit symbols should not contain multipliers,\
+      \ and it should be left to the multiplier to define the multiple for an entire\
+      \ data type. \r\n\r\nFor example, if a unit symbol is \"m2Pers\" and the multiplier\
+      \ is \"k\", then the value is k(m**2/s), and the multiplier applies to the entire\
+      \ final value, not to any individual part of the value. This can be conceptualized\
+      \ by substituting a derived unit symbol for the unit type. If one imagines that\
+      \ the symbol \"\xDE\" represents the derived unit \"m2Pers\", then applying\
+      \ the multiplier \"k\" can be conceptualized simply as \"k\xDE\".\r\n\r\nFor\
+      \ example, the SI unit for mass is \"kg\" and not \"g\".  If the unit symbol\
+      \ is defined as \"kg\", then the multiplier is applied to \"kg\" as a whole\
+      \ and does not replace the \"k\" in front of the \"g\". In this case, the multiplier\
+      \ of \"m\" would be used with the unit symbol of \"kg\" to represent one gram.\
+      \  As a text string, this violates the instructions in IEC 80000-1. However,\
+      \ because the unit symbol in CIM is treated as a derived unit instead of as\
+      \ an SI unit, it makes more sense to conceptualize the \"kg\" as if it were\
+      \ replaced by one of the proposed replacements for the SI mass symbol. If one\
+      \ imagines that the \"kg\" were replaced by a symbol \"\xDE\", then it is easier\
+      \ to conceptualize the multiplier \"m\" as creating the proper unit \"m\xDE\"\
+      , and not the forbidden unit \"mkg\"."
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM
+    enum_uri: cim:UnitMultiplier
+    permissible_values:
+      G:
+        meaning: cim:UnitMultiplier.G
+      h:
+        meaning: cim:UnitMultiplier.h
+      k:
+        meaning: cim:UnitMultiplier.k
+      m:
+        meaning: cim:UnitMultiplier.m
+      M:
+        meaning: cim:UnitMultiplier.M
+      micro:
+        meaning: cim:UnitMultiplier.micro
+      none:
+        meaning: cim:UnitMultiplier.none
+  UnitSymbol:
+    description: "The derived units defined for usage in the CIM. In some cases, the\
+      \ derived unit is equal to an SI unit. Whenever possible, the standard derived\
+      \ symbol is used instead of the formula for the derived unit. For example, the\
+      \ unit symbol Farad is defined as \"F\" instead of \"CPerV\". In cases where\
+      \ a standard symbol does not exist for a derived unit, the formula for the unit\
+      \ is used as the unit symbol. For example, density does not have a standard\
+      \ symbol and so it is represented as \"kgPerm3\". With the exception of the\
+      \ \"kg\", which is an SI unit, the unit symbols do not contain multipliers and\
+      \ therefore represent the base derived unit to which a multiplier can be applied\
+      \ as a whole. \r\nEvery unit symbol is treated as an unparseable text as if\
+      \ it were a single-letter symbol. The meaning of each unit symbol is defined\
+      \ by the accompanying descriptive text and not by the text contents of the unit\
+      \ symbol.\r\nTo allow the widest possible range of serializations without requiring\
+      \ special character handling, several substitutions are made which deviate from\
+      \ the format described in IEC 80000-1. The division symbol \"/\" is replaced\
+      \ by the letters \"Per\". Exponents are written in plain text after the unit\
+      \ as \"m3\" instead of being formatted as \"m\" with a superscript of 3  or\
+      \ introducing a symbol as in \"m^3\". The degree symbol \"\xB0\" is replaced\
+      \ with the letters \"deg\". Any clarification of the meaning for a substitution\
+      \ is included in the description for the unit symbol.\r\nNon-SI units are included\
+      \ in list of unit symbols to allow sources of data to be correctly labelled\
+      \ with their non-SI units (for example, a GPS sensor that is reporting numbers\
+      \ that represent feet instead of meters). This allows software to use the unit\
+      \ symbol information correctly convert and scale the raw data of those sources\
+      \ into SI-based units. \r\nThe integer values are used for harmonization with\
+      \ IEC 61850."
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM
+    enum_uri: cim:UnitSymbol
+    permissible_values:
+      A:
+        meaning: cim:UnitSymbol.A
+      Ah:
+        meaning: cim:UnitSymbol.Ah
+      none:
+        meaning: cim:UnitSymbol.none
+      ohm:
+        meaning: cim:UnitSymbol.ohm
+      V:
+        meaning: cim:UnitSymbol.V
+      VA:
+        meaning: cim:UnitSymbol.VA
+      VAh:
+        meaning: cim:UnitSymbol.VAh
+      VAr:
+        meaning: cim:UnitSymbol.VAr
+      VArh:
+        meaning: cim:UnitSymbol.VArh
+      W:
+        meaning: cim:UnitSymbol.W
+      Wb:
+        meaning: cim:UnitSymbol.Wb
+      Wh:
+        meaning: cim:UnitSymbol.Wh
+classes:
+  Measurement:
+    description: |-
+      A Measurement represents any measured, calculated or non-measured
+      non-calculated quantity. Any piece of equipment may contain Measurements,
+      e.g. a substation may have temperature measurements and door open
+      indications, a transformer may have oil temperature and tank pressure
+      measurements, a bay may contain a number of power flow measurements and a
+      Breaker may contain a switch status measurement.
+
+      The PSR - Measurement association is intended to capture this use of
+      Measurement and is included in the naming hierarchy based on
+      EquipmentContainer. The naming hierarchy typically has Measurements as
+      leaves, e.g. Substation-VoltageLevel-Bay-Switch-Measurement.
+
+      Some Measurements represent quantities related to a particular sensor
+      location in the network, e.g. a voltage transformer (VT) or potential
+      transformer (PT) at a busbar or a current transformer (CT) at the bar
+      between a breaker and an isolator.  The sensing position is not captured
+      in the PSR - Measurement association.  Instead it is captured by the
+      Measurement - Terminal association that is used to define the sensing
+      location in the network topology. The location is defined by the
+      connection of the Terminal to ConductingEquipment.
+
+      If both a Terminal and PSR are associated, and the PSR is of type
+      ConductingEquipment, the associated Terminal should belong to that
+      ConductingEquipment instance.
+
+      When the sensor location is needed both Measurement-PSR and
+      Measurement-Terminal are used. The Measurement-Terminal association is
+      never used alone.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Meas
+    is_a: IdentifiedObject
+    attributes:
+      unitMultiplier:
+        description: The unit multiplier of the measured quantity.
+        slot_uri: cim:Measurement.unitMultiplier
+        range: UnitMultiplier
+        required: true
+        multivalued: false
+      unitSymbol:
+        description: The unit of measure of the measured quantity.
+        slot_uri: cim:Measurement.unitSymbol
+        range: UnitSymbol
+        required: true
+        multivalued: false
+      Terminal:
+        description: One or more measurements may be associated with a terminal in
+          the network.
+        slot_uri: cim:Measurement.Terminal
+        range: curie
+        required: false
+        multivalued: false
+      PowerSystemResource:
+        description: The power system resource that contains the measurement.
+        slot_uri: cim:Measurement.PowerSystemResource
+        range: curie
+        required: false
+        multivalued: false
+    class_uri: cim:Measurement
+    tree_root: true
+  IdentifiedObject:
+    description: This is a root class to provide common identification for all classes
+      needing identification and naming attributes.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Core
+    attributes:
+      mRID:
+        description: "Master resource identifier issued by a model authority. The\
+          \ mRID is unique within an exchange context. Global uniqueness is easily\
+          \ achieved by using a UUID, as specified in RFC 4122, for the mRID. The\
+          \ use of UUID is strongly recommended.\r\nFor CIMXML data files in RDF syntax\
+          \ conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about\
+          \ attributes that identify CIM object elements."
+        slot_uri: cim:IdentifiedObject.mRID
+        range: string
+        identifier: true
+        required: true
+        multivalued: false
+      name:
+        description: "The name is any free human readable and possibly non unique\
+          \ text naming the object.\r\n"
+        slot_uri: cim:IdentifiedObject.name
+        range: string
+        required: false
+        multivalued: false
+    class_uri: cim:IdentifiedObject
+  Analog:
+    description: "Analog represents an analog Measurement.\r\n"
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Meas
+    is_a: Measurement
+    attributes:
+      positiveFlowIn:
+        description: If true then this measurement is an active power, reactive power
+          or current with the convention that a positive value measured at the Terminal
+          means power is flowing into the related PowerSystemResource.
+        slot_uri: cim:Analog.positiveFlowIn
+        range: boolean
+        required: false
+        multivalued: false
+    class_uri: cim:Analog
+  AnalogValue:
+    description: AnalogValue represents an analog MeasurementValue.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Meas
+    is_a: MeasurementValue
+    attributes:
+      value:
+        description: The value to supervise.
+        slot_uri: cim:AnalogValue.value
+        range: float
+        required: false
+        multivalued: false
+      Analog:
+        description: Measurement to which this value is connected.
+        slot_uri: cim:AnalogValue.Analog
+        range: Analog
+        required: true
+        multivalued: false
+    class_uri: cim:AnalogValue
+  MeasurementValue:
+    description: "The current state for a measurement. A state value is an instance\
+      \ of a measurement from a specific source. Measurements can be associated with\
+      \ many state values, each representing a different source for the measurement.\r\
+      \n"
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Meas
+    is_a: IOPoint
+    attributes:
+      timeStamp:
+        description: The time when the value was last updated.
+        slot_uri: cim:MeasurementValue.timeStamp
+        range: datetime
+        required: false
+        multivalued: false
+    class_uri: cim:MeasurementValue
+  IOPoint:
+    description: The class describe a measurement or control value. The purpose is
+      to enable having attributes and associations common for measurement and control.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Meas
+    is_a: IdentifiedObject
+    class_uri: cim:IOPoint

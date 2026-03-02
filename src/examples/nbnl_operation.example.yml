@@ -1,0 +1,69 @@
+'@context':
+  linkml: https://w3id.org/linkml/
+  cim: https://cim.ucaiug.io/ns#
+  dct: http://purl.org/dc/terms/
+  gh: https://github.com/
+  cbs: https://www.cbs.nl/nl-nl/onze-diensten/methoden/begrippen/
+  eu: https://cim.ucaiug.io/ns/eu#
+  nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  nl: https://cim.ucaiug.io/ns/nl#
+  skos: http://www.w3.org/2004/02/skos/core#
+  xsd: http://www.w3.org/2001/XMLSchema#
+  dcterms: http://purl.org/dc/terms/
+'@id': urn:uuid:2808ccf7-c19c-4b96-aa65-7e21c2425458
+'dcterms:issued':
+  '@value': 2025-12-05T12:34:567Z
+  '@type': xsd:date
+'dcterms:title': 'Example JSON-LD instance data'
+'dcterms:publisher':
+  '@id': urn:uuid:4f74c8e2-adb5-4815-9607-eb00fb6a0d55
+  'dcterms:title': 'Liander'
+'dcterms:references':
+  - '@id': urn:uuid:2808ccf7-c19c-4b96-aa65-7e21c2425458
+'@graph':
+  - '@id': urn:uuid:48eec3cb-caa2-4e44-a80a-6bfd2dbdc942
+    '@type': cim:Analog
+    cim:Measurement.unitMultiplier:
+      '@id': cim:UnitMultiplier.k
+    cim:Measurement.unitSymbol:
+      '@id': cim:UnitSymbol.W
+    cim:Measurement.PowerSystemResource:
+      - urn:uuid:91bcb52e-eae4-42f0-9d31-2eb51511f3f8
+    cim:IdentifiedObject.mRID: 48eec3cb-caa2-4e44-a80a-6bfd2dbdc942
+    cim:IdentifiedObject.name: Belastingprofiel
+# --- "Now"
+  - '@id': urn:uuid:9bc41599-b7bd-410f-b621-0a7d043ccc88
+    '@type': cim:AnalogValue
+    cim:AnalogValue.value:
+      '@value': 8.0
+      '@type': xsd:float
+    cim:AnalogValue.Analog:
+      '@id': urn:uuid:48eec3cb-caa2-4e44-a80a-6bfd2dbdc942
+    cim:MeasurementValue.timeStamp:
+      '@value': 2025-12-05T09:00:000Z
+      '@type': xsd:dateTime
+    cim:IdentifiedObject.mRID: 9bc41599-b7bd-410f-b621-0a7d043ccc88
+# --- +24h
+  - '@id': urn:uuid:c34ef974-fce5-4646-bb48-b5b91b727a35
+    '@type': cim:AnalogValue
+    cim:AnalogValue.value:
+      '@value': 15.0
+      '@type': xsd:float
+    cim:AnalogValue.Analog:
+      '@id': urn:uuid:48eec3cb-caa2-4e44-a80a-6bfd2dbdc942
+    cim:MeasurementValue.timeStamp:
+      '@value': 2025-12-06T09:00:000Z
+      '@type': xsd:dateTime
+    cim:IdentifiedObject.mRID: c34ef974-fce5-4646-bb48-b5b91b727a35
+# --- +48h
+  - '@id': urn:uuid:5496118f-9ab9-46a1-bc06-d205408de43e
+    '@type': cim:AnalogValue
+    cim:AnalogValue.value:
+      '@value': 27.0
+      '@type': xsd:float
+    cim:AnalogValue.Analog:
+      '@id': urn:uuid:48eec3cb-caa2-4e44-a80a-6bfd2dbdc942
+    cim:MeasurementValue.timeStamp:
+      '@value': 2025-12-07T09:00:000Z
+      '@type': xsd:dateTime
+    cim:IdentifiedObject.mRID: 5496118f-9ab9-46a1-bc06-d205408de43e
