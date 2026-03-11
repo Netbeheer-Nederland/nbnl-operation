@@ -13,7 +13,7 @@ prefixes:
   gh: https://github.com/
   cbs: https://www.cbs.nl/nl-nl/onze-diensten/methoden/begrippen/
   eu: https://cim.ucaiug.io/ns/eu#
-  nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  nbnl-term: https://begrippen.netbeheernederland.nl/id/
   nl: https://cim.ucaiug.io/ns/nl#
   skos: http://www.w3.org/2004/02/skos/core#
   xsd: http://www.w3.org/2001/XMLSchema#
@@ -215,6 +215,8 @@ classes:
         range: boolean
         required: false
         multivalued: false
+    exact_mappings:
+    - nbnl-term:7bs28
     class_uri: cim:Analog
   AnalogValue:
     description: AnalogValue represents an analog MeasurementValue.
