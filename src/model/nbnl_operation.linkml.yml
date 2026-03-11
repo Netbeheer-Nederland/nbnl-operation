@@ -217,6 +217,7 @@ classes:
         multivalued: false
     exact_mappings:
     - nbnl-term:7bs28
+    - nbnl-term:7n44w
     class_uri: cim:Analog
   AnalogValue:
     description: AnalogValue represents an analog MeasurementValue.
