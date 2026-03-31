@@ -9,6 +9,7 @@ imports:
 prefixes:
   linkml: https://w3id.org/linkml/
   cim: https://cim.ucaiug.io/ns#
+  ck: http://data.netbeheernederland.nl/capaciteitskaart/def#
   dct: http://purl.org/dc/terms/
   gh: https://github.com/
   cbs: https://www.cbs.nl/nl-nl/onze-diensten/methoden/begrippen/
@@ -17,6 +18,7 @@ prefixes:
   nl: https://cim.ucaiug.io/ns/nl#
   skos: http://www.w3.org/2004/02/skos/core#
   xsd: http://www.w3.org/2001/XMLSchema#
+  vocab: http://modellen.netbeheernederland.nl/nbnl-operation/
 annotations:
   model_uri: https://modellen.netbeheernederland.nl/nbnl-operation
   exchange_format: application/ld+json
@@ -258,3 +260,71 @@ classes:
     from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Meas
     is_a: IdentifiedObject
     class_uri: cim:IOPoint
+  Queue:
+    description:
+      Waiting queue information associated with a cim:ReportingGroup from EQ.
+    is_a: IdentifiedObject
+    attributes:
+      requests:
+        description:
+          Number of requests for new grid connections and capacity increases in
+          queue.
+        slot_uri: nl:Queue.requests
+        range: integer
+        required: false
+        multivalued: false
+        exact_mappings:
+        - ck:EnergyArea.demand_requests_in_queue
+        - ck:EnergyArea.generation_requests_in_queue
+      capacity:
+        description: The requested capacity for the combined requests.
+        slot_uri: nl:Queue.capacity
+        range: ActivePower
+        required: false
+        multivalued: false
+        exact_mappings:
+        - ck:EnergyArea.demand_capacity_in_queue
+        - ck:EnergyArea.generation_capacity_in_queue
+      ReportingGroup:
+        slot_uri: nl:Queue.ReportingGroup
+        range: curie
+        required: false
+        multivalued: true
+        description: Reporting groups to which this queue belongs.
+      positiveFlowIn:
+        description:
+          If true then this queue applies to active power, reactive power or
+          current with the convention that a positive value measured means
+          power is flowing into the related ReportingGroup.
+        slot_uri: nl:ContingencyElement.positiveFlowIn
+        range: boolean
+        required: false
+        multivalued: false
+    exact_mappings:
+    - vocab:wachtrij
+    class_uri: nl:Queue
+  ActivePower:
+    annotations:
+      represents_cim_data_type:
+        tag: represents_cim_data_type
+        value: true
+    description: Product of RMS value of the voltage and the RMS value of the in-phase
+      component of the current.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Domain
+    attributes:
+      multiplier:
+        slot_uri: cim:ActivePower.multiplier
+        range: UnitMultiplier
+        required: true
+        multivalued: false
+      unit:
+        slot_uri: cim:ActivePower.unit
+        range: UnitSymbol
+        required: true
+        multivalued: false
+      value:
+        slot_uri: cim:ActivePower.value
+        range: float
+        required: true
+        multivalued: false
+    class_uri: cim:ActivePower

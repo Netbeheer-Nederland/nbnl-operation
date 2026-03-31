@@ -86,6 +86,7 @@ Terminal.class: grid
 Analog.class: grid
 AnalogValue.class: grid
 PowerSystemResource.class: grid
+Queue.class: grid
 
 Analog -> Terminal
 Analog -> PowerSystemResource
