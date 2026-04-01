@@ -1,0 +1,92 @@
+'@context':
+  linkml: https://w3id.org/linkml/
+  cim: https://cim.ucaiug.io/ns#
+  dct: http://purl.org/dc/terms/
+  gh: https://github.com/
+  cbs: https://www.cbs.nl/nl-nl/onze-diensten/methoden/begrippen/
+  eu: https://cim.ucaiug.io/ns/eu#
+  nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  nl: https://cim.ucaiug.io/ns/nl#
+  skos: http://www.w3.org/2004/02/skos/core#
+  xsd: http://www.w3.org/2001/XMLSchema#
+  dcterms: http://purl.org/dc/terms/
+'@id': urn:uuid:21c1445b-4bcb-4a13-984e-4a0f041f4f1b
+'dcterms:issued':
+  '@value': 2026-03-31T12:34:56Z
+  '@type': xsd:dateTime
+'dcterms:title': 'Medium Voltage (MV) JSON-LD instance data'
+'dcterms:publisher':
+  '@id': urn:uuid:4f74c8e2-adb5-4815-9607-eb00fb6a0d55
+  'dcterms:title': 'Liander'
+'dcterms:references':
+  - '@id': urn:uuid:2d3088c1-2b9a-4cbc-84fa-c0670e0e8ecc
+'@graph':
+  # --- cim:Analog ------------------------------------------------------------
+  - '@id': urn:uuid:42fb49cf-0821-4a28-94fc-4fbf28302172
+    '@type': cim:Analog
+    cim:Analog.positiveFlowIn: true
+    cim:Measurement.measurementType:
+      '@id': nl:MeasurementKind.gevraagdeTransportcapaciteit
+    cim:Measurement.unitMultiplier:
+      '@id': cim:UnitMultiplier.M
+    cim:Measurement.unitSymbol:
+      '@id': cim:UnitSymbol.W
+    cim:Measurement.Terminal:
+      - urn:uuid:4d4b29be-1386-45e1-acc3-b86cfab83c94
+    cim:Measurement.PowerSystemResource:
+      - urn:uuid:efeba515-547b-4c1a-8cd0-4cbc5f714283
+    cim:IdentifiedObject.mRID: 42fb49cf-0821-4a28-94fc-4fbf28302172
+    cim:IdentifiedObject.description: 'Gevraagde transportcapaciteit, demand/PowerTransformer'
+  - '@id': urn:uuid:ec07b63a-92c4-4798-bff6-855e919d9ea6
+    '@type': cim:AnalogValue
+    cim:AnalogValue.value:
+      '@value': 2.0
+      '@type': xsd:float
+    cim:AnalogValue.Analog:
+      '@id': urn:uuid:42fb49cf-0821-4a28-94fc-4fbf28302172
+    cim:IdentifiedObject.mRID: ec07b63a-92c4-4798-bff6-855e919d9ea6
+  # --- cim:Analog ------------------------------------------------------------
+  - '@id': urn:uuid:37b91a3d-5085-4d78-90e4-45d472c99b29
+    '@type': cim:Analog
+    cim:Analog.positiveFlowIn: true
+    cim:Measurement.measurementType:
+      '@id': nl:MeasurementKind.benodigdeTransportcapaciteit
+    cim:Measurement.unitMultiplier:
+      '@id': cim:UnitMultiplier.M
+    cim:Measurement.unitSymbol:
+      '@id': cim:UnitSymbol.W
+    cim:Measurement.Terminal:
+      - urn:uuid:4d4b29be-1386-45e1-acc3-b86cfab83c94
+    cim:Measurement.PowerSystemResource:
+      - urn:uuid:efeba515-547b-4c1a-8cd0-4cbc5f714283
+    cim:IdentifiedObject.mRID: 37b91a3d-5085-4d78-90e4-45d472c99b29
+    cim:IdentifiedObject.description: 'Benodigde transportcapaciteit, demand/PowerTransformer'
+  - '@id': urn:uuid:0fe9f24c-4ad9-41ef-9056-38a24b3520c7
+    '@type': cim:AnalogValue
+    cim:AnalogValue.value:
+      '@value': 8.0
+      '@type': xsd:float
+    cim:AnalogValue.Analog:
+      '@id': urn:uuid:37b91a3d-5085-4d78-90e4-45d472c99b29
+    cim:IdentifiedObject.mRID: 0fe9f24c-4ad9-41ef-9056-38a24b3520c7
+  # --- nl:Queue --------------------------------------------------------------
+  - '@id': urn:uuid:8ac69850-861a-4127-bcdb-3c644c516dd7
+    '@type': nl:Queue
+    nl:Queue.requests: 13
+    nl:Queue.capacity:
+      '@id': urn:uuid:1ad7cf50-0e5a-44ed-9154-8230e74731c6
+    nl:Queue.ReportingGroup:
+      - urn:uuid:fc097c75-f494-4bb5-97bd-d63d7d63b2b5
+    nl:ContingencyElement.positiveFlowIn: true
+    cim:IdentifiedObject.mRID: 8ac69850-861a-4127-bcdb-3c644c516dd7
+    cim:IdentifiedObject.name: '20-3i'
+    cim:IdentifiedObject.description: 'Queue on demand/PowerTransformer'
+  - '@id': urn:uuid:1ad7cf50-0e5a-44ed-9154-8230e74731c6
+    '@type': cim:ActivePower
+    cim:ActivePower.multiplier:
+      '@id': cim:UnitMultiplier.M
+    cim:ActivePower.unit:
+      '@id': cim:UnitSymbol.W
+    cim:ActivePower.value:
+      '@value': 4.5
+      '@type': xsd:float

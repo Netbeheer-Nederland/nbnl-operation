@@ -12,9 +12,9 @@
   dcterms: http://purl.org/dc/terms/
 '@id': urn:uuid:2808ccf7-c19c-4b96-aa65-7e21c2425458
 'dcterms:issued':
-  '@value': 2025-12-05T12:34:567Z
-  '@type': xsd:date
-'dcterms:title': 'Example JSON-LD instance data'
+  '@value': 2025-12-05T12:34:56Z
+  '@type': xsd:dateTime
+'dcterms:title': 'Low Voltage (LV) JSON-LD instance data'
 'dcterms:publisher':
   '@id': urn:uuid:4f74c8e2-adb5-4815-9607-eb00fb6a0d55
   'dcterms:title': 'Liander'

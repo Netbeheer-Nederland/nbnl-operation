@@ -118,6 +118,14 @@ enums:
         meaning: cim:UnitSymbol.Wb
       Wh:
         meaning: cim:UnitSymbol.Wh
+  MeasurementKind:
+    description: Types of measurement.
+    enum_uri: nl:MeasurementKind
+    permissible_values:
+      gevraagdeTransportCapaciteit:
+        meaning: nl:MeasurementKind.gevraagdeTransportcapaciteit
+      benodigdeTransportCapaciteit:
+        meaning: nl:MeasurementKind.benodigdeTransportcapaciteit
 classes:
   Measurement:
     description: |-
@@ -152,6 +160,16 @@ classes:
     from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Meas
     is_a: IdentifiedObject
     attributes:
+      measurementType:
+        slot_uri: cim:Measurement.measurementType
+        range: MeasurementKind
+        required: false
+        multivalued: false
+        description: "Specifies the type of measurement.  For example, this specifies\
+          \ if the measurement represents an indoor temperature, outdoor temperature,\
+          \ bus voltage, line flow, etc.\r\nWhen the measurementType is set to \"\
+          Specialization\", the type of Measurement is defined in more detail by the\
+          \ specialized class which inherits from Measurement.\r\n\r\n"
       unitMultiplier:
         description: The unit multiplier of the measured quantity.
         slot_uri: cim:Measurement.unitMultiplier
@@ -184,6 +202,13 @@ classes:
       needing identification and naming attributes.
     from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Core
     attributes:
+      description:
+        description: The description is a free human readable text describing or naming
+          the object. It may be non unique and may not correlate to a naming hierarchy.
+        slot_uri: cim:IdentifiedObject.description
+        range: string
+        required: false
+        multivalued: false
       mRID:
         description: "Master resource identifier issued by a model authority. The\
           \ mRID is unique within an exchange context. Global uniqueness is easily\
@@ -288,7 +313,7 @@ classes:
       ReportingGroup:
         slot_uri: nl:Queue.ReportingGroup
         range: curie
-        required: false
+        required: true
         multivalued: true
         description: Reporting groups to which this queue belongs.
       positiveFlowIn:
