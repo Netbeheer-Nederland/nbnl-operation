@@ -126,6 +126,8 @@ enums:
         meaning: nl:MeasurementKind.gevraagdeTransportcapaciteit
       benodigdeTransportCapaciteit:
         meaning: nl:MeasurementKind.benodigdeTransportcapaciteit
+      piekbelasting:
+        meaning: nl:MeasurementKind.piekbelasting
 classes:
   Measurement:
     description: |-
