@@ -10,7 +10,7 @@
   skos: http://www.w3.org/2004/02/skos/core#
   xsd: http://www.w3.org/2001/XMLSchema#
   dcterms: http://purl.org/dc/terms/
-'@id': urn:uuid:2808ccf7-c19c-4b96-aa65-7e21c2425458
+'@id': urn:uuid:48b6d9d1-a32a-4469-8332-ef2e74c7cbbc
 'dcterms:issued':
   '@value': '2026-04-15T06:16:18.867827Z'
   '@type': xsd:dateTime
