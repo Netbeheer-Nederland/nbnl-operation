@@ -77,7 +77,7 @@
       '@id': urn:uuid:1ad7cf50-0e5a-44ed-9154-8230e74731c6
     nl:Queue.ReportingGroup:
       - urn:uuid:fc097c75-f494-4bb5-97bd-d63d7d63b2b5
-    nl:ContingencyElement.positiveFlowIn: true
+    nl:Queue.positiveFlowIn: true
     cim:IdentifiedObject.mRID: 8ac69850-861a-4127-bcdb-3c644c516dd7
     cim:IdentifiedObject.name: '20-3i'
     cim:IdentifiedObject.description: 'Queue on demand/PowerTransformer'

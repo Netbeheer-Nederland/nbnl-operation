@@ -323,7 +323,7 @@ classes:
           If true then this queue applies to active power, reactive power or
           current with the convention that a positive value measured means
           power is flowing into the related ReportingGroup.
-        slot_uri: nl:ContingencyElement.positiveFlowIn
+        slot_uri: nl:Queue.positiveFlowIn
         range: boolean
         required: false
         multivalued: false
