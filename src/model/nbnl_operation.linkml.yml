@@ -24,6 +24,17 @@ annotations:
   exchange_format: application/ld+json
   model_type: data-product
 enums:
+  InterTieDirection:
+    enum_uri: cim:InterTieDirection
+    description: Direction of an intertie or queue.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC62325.MarketOperations.MktDomain
+    permissible_values:
+      E:
+        meaning: cim:InterTieDirection.E
+        description: Export from the grid, from the perspective of the system operator.
+      I:
+        meaning: cim:InterTieDirection.I
+        description: Import into the grid, from the perspective of the system operator.
   UnitMultiplier:
     description: "The unit multipliers defined for the CIM.  When applied to unit\
       \ symbols, the unit symbol is treated as a derived unit. Regardless of the contents\
@@ -197,6 +208,12 @@ classes:
         range: curie
         required: false
         multivalued: false
+      SeriesEquipmentDependentLimit:
+        slot_uri: nl:Measurement.SeriesEquipmentDependentLimit
+        range: curie
+        required: false
+        multivalued: false
+        description: Measurement which applies to all contained Equipment-s.
     class_uri: cim:Measurement
     tree_root: true
   IdentifiedObject:
@@ -320,13 +337,19 @@ classes:
         description: Reporting groups to which this queue belongs.
       positiveFlowIn:
         description:
-          If true then this queue applies to active power, reactive power or
-          current with the convention that a positive value measured means
-          power is flowing into the related ReportingGroup.
+          _DEPRECATED_ If true then this queue applies to active power, reactive
+          power or current with the convention that a positive value measured
+          means power is flowing into the related ReportingGroup.
         slot_uri: nl:Queue.positiveFlowIn
         range: boolean
         required: false
         multivalued: false
+      direction:
+        slot_uri: nl:Queue.direction
+        range: InterTieDirection
+        required: false
+        multivalued: false
+        description: "The direction of the queue, export or import"
     exact_mappings:
     - vocab:wachtrij
     class_uri: nl:Queue
