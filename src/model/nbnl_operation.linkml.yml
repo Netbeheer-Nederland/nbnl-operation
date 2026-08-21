@@ -35,6 +35,17 @@ enums:
       I:
         meaning: cim:InterTieDirection.I
         description: Import into the grid, from the perspective of the system operator.
+  UpdateInfoKind:
+    description: Type of information that has been updated as part of this
+      dataset.
+    enum_uri: nl:UpdateInfoKind
+    permissible_values:
+      BTC:
+        description: Benodigde transportcapaciteit.
+        meaning: nl:UpdateInfoKind.BTC
+      WR:
+        description: Wachtrij.
+        meaning: nl:UpdateInfoKind.WR
   UnitMultiplier:
     description: "The unit multipliers defined for the CIM.  When applied to unit\
       \ symbols, the unit symbol is treated as a derived unit. Regardless of the contents\
@@ -140,6 +151,23 @@ enums:
       piekbelasting:
         meaning: nl:MeasurementKind.piekbelasting
 classes:
+  UpdateInfo:
+    description: Specific type of information that was updated for this
+      dataset.
+    attributes:
+      date:
+        description: Date of the update.
+        slot_uri: nl:UpdateInfo.date
+        range: date
+        required: true
+        multivalued: false
+      type:
+        description: Type of the update.
+        slot_uri: nl:UpdateInfo.type
+        range: UpdateInfoKind
+        required: true
+        multivalued: false
+    class_uri: nl:UpdateInfo
   Measurement:
     description: |-
       A Measurement represents any measured, calculated or non-measured

@@ -20,6 +20,14 @@
   'dcterms:title': 'Liander'
 'dcterms:references':
   - '@id': urn:uuid:2d3088c1-2b9a-4cbc-84fa-c0670e0e8ecc
+'nl:updated':
+  - '@id': urn:uuid:4442f440-e3f1-458e-95b0-35724a7e6a27
+    '@type': nl:UpdateInfo
+    nl:UpdateInfo.date:
+      '@value': '2026-05-08'
+      '@type': xsd:date
+    nl:UpdateInfo.type:
+      '@id': nl:UpdateInfoKind.BTC
 '@graph':
   # --- cim:Analog ------------------------------------------------------------
   - '@id': urn:uuid:42fb49cf-0821-4a28-94fc-4fbf28302172
