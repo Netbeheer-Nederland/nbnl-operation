@@ -82,15 +82,15 @@ legend: "" {
 
 direction: down
 
-Terminal.class: grid
+ActivePower.class: grid
 Analog.class: grid
 AnalogValue.class: grid
 PowerSystemResource.class: grid
 Queue.class: grid
 
-Analog -> Terminal
-Analog -> PowerSystemResource
-AnalogValue -> Analog
+Analog -- PowerSystemResource
+AnalogValue -- Analog
+Queue -- ActivePower
 ----
 
 This data product requires the use of an _Equipment_ dataset for instantiation
