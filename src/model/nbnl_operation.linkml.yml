@@ -144,9 +144,9 @@ enums:
     description: Types of measurement.
     enum_uri: nl:MeasurementKind
     permissible_values:
-      gevraagdeTransportCapaciteit:
+      gevraagdeTransportcapaciteit:
         meaning: nl:MeasurementKind.gevraagdeTransportcapaciteit
-      benodigdeTransportCapaciteit:
+      benodigdeTransportcapaciteit:
         meaning: nl:MeasurementKind.benodigdeTransportcapaciteit
       piekbelasting:
         meaning: nl:MeasurementKind.piekbelasting
