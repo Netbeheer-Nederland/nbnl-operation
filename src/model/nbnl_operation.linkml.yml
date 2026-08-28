@@ -24,6 +24,17 @@ annotations:
   exchange_format: application/ld+json
   model_type: data-product
 enums:
+  Validity:
+    description: "Validity for MeasurementValue.\r\n"
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM
+    enum_uri: cim:Validity
+    permissible_values:
+      GOOD:
+        meaning: cim:Validity.GOOD
+      INVALID:
+        meaning: cim:Validity.INVALID
+      QUESTIONABLE:
+        meaning: cim:Validity.QUESTIONABLE
   InterTieDirection:
     enum_uri: cim:InterTieDirection
     description: Direction of an intertie or queue.
@@ -150,6 +161,18 @@ enums:
         meaning: nl:MeasurementKind.benodigdeTransportcapaciteit
       piekbelasting:
         meaning: nl:MeasurementKind.piekbelasting
+      electricHeating:
+        meaning: nl:MeasurementKind.electricHeating
+      airconditioner:
+        meaning: nl:MeasurementKind.airconditioner
+      heatpump:
+        meaning: nl:MeasurementKind.heatpump
+      vehicleChargingStation:
+        meaning: nl:MeasurementKind.vehicleChargingStation
+      solarPanel:
+        meaning: nl:MeasurementKind.solarPanel
+      battery:
+        meaning: nl:MeasurementKind.battery
 classes:
   UpdateInfo:
     description: Specific type of information that was updated for this
@@ -397,3 +420,58 @@ classes:
         required: true
         multivalued: false
     class_uri: cim:ActivePower
+  MeasurementValueQuality:
+    description: Measurement quality flags. Bits 0-10 are defined for substation automation
+      in IEC 61850-7-3. Bits 11-15 are reserved for future expansion by that document.
+      Bits 16-31 are reserved for EMS applications.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Meas
+    is_a: Quality61850
+    attributes:
+      MeasurementValue:
+        description: A MeasurementValue has a MeasurementValueQuality associated with
+          it.
+        slot_uri: cim:MeasurementValueQuality.MeasurementValue
+        range: AnalogValue
+        required: true
+        multivalued: false
+    class_uri: cim:MeasurementValueQuality
+  Quality61850:
+    description: "Quality flags in this class are as defined in IEC 61850, except\
+      \ for estimatorReplaced, which has been included in this class for convenience.\r\
+      \n"
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Meas
+    attributes:
+      probabilityPercent:
+        slot_uri: nl:Quality61850.probabilityPercent
+        range: PerCent
+        required: false
+        multivalued: false
+        description:
+          Probability of correctness of the value expressed as a percentage.
+          Applicable only when value is related to a estimation (not an
+          observation).
+    class_uri: cim:Quality61850
+  PerCent:
+    class_uri: cim:PerCent
+    annotations:
+      represents_cim_data_type: true
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Domain
+    description: "Percentage on a defined base. For example, specify as 100 to indicate\
+      \ at the defined base.\r\n"
+    attributes:
+      multiplier:
+        slot_uri: cim:PerCent.multiplier
+        range: UnitMultiplier
+        required: false
+        multivalued: false
+      unit:
+        slot_uri: cim:PerCent.unit
+        range: UnitSymbol
+        required: false
+        multivalued: false
+      value:
+        slot_uri: cim:PerCent.value
+        range: float
+        required: false
+        multivalued: false
+        description: Normally 0 to 100 on a defined base.
