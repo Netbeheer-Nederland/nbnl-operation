@@ -150,6 +150,9 @@ enums:
         meaning: nl:MeasurementKind.benodigdeTransportcapaciteit
       piekbelasting:
         meaning: nl:MeasurementKind.piekbelasting
+      threePhaseActivePower:
+        meaning: nl:MeasurementKind.threePhaseActivePower
+        description: Total current (rms) in a three phase circuit
 classes:
   UpdateInfo:
     description: Specific type of information that was updated for this
@@ -325,6 +328,15 @@ classes:
         range: datetime
         required: false
         multivalued: false
+      probabilityPercent:
+        slot_uri: nl:MeasurementValue.probabilityPercent
+        range: float
+        required: false
+        multivalued: false
+        description:
+          Probability of correctness of the value expressed as a percentage.
+          Applicable only when value is related to a estimation (not an
+          observation).
     class_uri: cim:MeasurementValue
   IOPoint:
     description: The class describe a measurement or control value. The purpose is
